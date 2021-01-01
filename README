@@ -1,0 +1,29 @@
+# quickmemo-reformatter
+
+Reformatting exported memos from LG QuickMemo+ to something more consumable
+
+## Why
+
+Notes can pile up. This is a handy script to facilitate periodic review.
+
+## How
+
+Use the export function built into the app. The folder
+`/storage/emulated/0/QuickMemo+` will have lqm files. Copying can go faster if
+the files are moved to /storage/emulated/0/DCIM and PTP is used and not MTP.
+
+```
+pushd $lqm_dir
+find . -name \
+  "*.lqm" -exec sh -c "basename '{}' .lqm | xargs unzip '{}' -d " \; -delete
+popd
+python qm_reformat.py $lqm_dir
+```
+
+## Future features (maybe)
+
+* reasonably-named output
+* save or skip note
+* sort note
+* edit note before saving
+* graphical stuff
